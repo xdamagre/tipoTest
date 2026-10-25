@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Quina tipografia és?</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=EB+Garamond&family=Cormorant+Garamond&family=Libre+Baskerville&family=Tinos&family=Playfair+Display&family=Bodoni+Moda&family=Rokkitt&family=Zilla+Slab&family=Oswald&family=Anton&family=Arimo&family=Inter&family=Cabin&family=Lato&family=Jost&family=Poppins&family=Pinyon+Script&family=Great+Vibes&family=Parisienne&family=Allura&family=UnifrakturCook:wght@700&family=Pirata+One&family=Caveat&family=Kaushan+Script&family=Creepster&family=Monoton&family=Special+Elite&family=Rubik+Glitch&display=swap">
 <style>
 :root{--bg:#fff;--card:#fff;--ink:#4b4b4b;--mute:#777;--line:#e5e5e5;--green:#58cc02;--green-d:#58a700;--okbg:#d7ffb8;--oktx:#58a700;--red:#ff4b4b;--red-d:#ea2b2b;--kobg:#ffdfe0;--kotx:#ea2b2b;--blue:#1cb0f6;--blue-d:#1899d6;--selbg:#ddf4ff;--seltx:#1899d6;--track:#e5e5e5}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131f24;--card:#131f24;--ink:#dce6ec;--mute:#8b9ba4;--line:#37464f;--okbg:#1d3a14;--oktx:#89e219;--kobg:#3b1c1e;--kotx:#ff7878;--selbg:#12303d;--seltx:#49c0f8;--track:#37464f}}
@@ -71,11 +70,18 @@ main{padding:6px 12px 200px}
 #msg{font-size:17px;min-width:0}
 footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 }
+@font-face{font-family:"ITC Franklin Gothic";src:url("fonts/FranklinGothic.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"American Typewriter";src:url("fonts/american-typewriter.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Archer";src:url("fonts/ArcherMediumPro.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Rockwell";src:url("fonts/RockwellNova.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Didot";src:url("fonts/Didot.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Avenir";src:url("fonts/AvenirLTProBook.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Frutiger";src:url("fonts/Frutiger.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Gill Sans";src:url("fonts/Gill%20Sans.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Futura";src:url("fonts/FuturaCyrillicBook.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Helvetica";src:url("fonts/Helvetica.woff2") format("woff2");font-display:swap}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Sorts+Mill+Goudy&family=IM+Fell+English&family=Cardo&family=Goudy+Bookletter+1911&family=Linden+Hill&family=Baskervville&family=Libre+Caslon+Text&family=Gelasio&family=PT+Serif&family=Source+Serif+4&family=Abril+Fatface&family=Libre+Bodoni&family=Gloock&family=Rozha+One&family=Prata&family=Roboto+Slab&family=Arvo&family=Bitter&family=Crete+Round&family=Aleo&family=Josefin+Slab&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fjalla+One&family=Libre+Franklin&family=Archivo+Black&family=Barlow+Condensed&family=Antonio&family=Roboto&family=Public+Sans&family=Work+Sans&family=IBM+Plex+Sans&family=Albert+Sans&family=Open+Sans&family=Fira+Sans&family=Alegreya+Sans&family=Ubuntu&family=Noto+Sans&family=Source+Sans+3&family=Montserrat&family=Raleway&family=Quicksand&family=Josefin+Sans&family=Outfit&family=Questrial&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Italianno&family=Tangerine&family=Alex+Brush&family=Petit+Formal+Script&family=Playball&family=Dancing+Script&family=Sacramento&family=Cookie&family=Marck+Script&family=Courgette&family=UnifrakturMaguntia&family=Grenze+Gotisch&family=New+Rocker&family=Jacquard+24&family=Permanent+Marker&family=Pacifico&family=Shadows+Into+Light&family=Amatic+SC&family=Gochi+Hand&family=Rock+Salt&family=Lobster&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fascinate&family=Eater&family=Bungee+Shade&family=Press+Start+2P&family=Rye&family=Faster+One&family=Frijole&family=Nosifer&family=Butcherman&family=Emilys+Candy&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap">
 </head>
 <body>
 <div class="top"><span id="flame" class="st" title="Ratxa"><span id="fe">🔥</span> <span id="sStreak">0</span></span><span title="XP total">⭐ <span id="sXp">0</span></span><span title="Rècord de ratxa">🏆 <span id="sBest">0</span></span></div>
@@ -123,6 +129,9 @@ const MORE={
 'deco|none':'Fascinate,Eater,Bungee Shade,Press Start 2P,Rye,Faster One,Frijole,Nosifer,Butcherman,Emilys Candy'};
 const GEN={serif:'serif',sans:'sans-serif',script:'cursive',deco:'fantasy'};
 for(const k in MORE){const [f,s]=k.split('|');MORE[k].split(',').forEach(n=>FONTS.push([f,s,n,s==='black'?'serif':GEN[f]]))}
+const LOCAL=new Set(['ITC Franklin Gothic', 'American Typewriter', 'Archer', 'Rockwell', 'Didot', 'Avenir', 'Frutiger', 'Gill Sans', 'Futura', 'Helvetica']);
+[['sans','grot','ITC Franklin Gothic'],['serif','slab','American Typewriter'],['serif','slab','Archer'],['serif','slab','Rockwell'],['serif','modern','Didot'],['sans','geo','Avenir'],['sans','human','Frutiger'],['sans','human','Gill Sans'],['sans','geo','Futura'],['sans','neo','Helvetica']].forEach(a=>FONTS.push([a[0],a[1],a[2],a[0]==='serif'?'serif':'sans-serif']));
+FONTS.splice(0,FONTS.length-LOCAL.size);
 const PHRASES=[
 'Setze jutges d’un jutjat mengen fetge d’un penjat.','Més val tard que mai.','Poc a poc i bona lletra.',
 'Qui dia passa, any empeny.','Els bons amics es coneixen a les dures.','La tipografia és la veu silenciosa del text.',
@@ -131,6 +140,9 @@ const PHRASES=[
 'A cavall regalat no li miris el dentat.','El tipus fa que les paraules es vegin.'
 ];
 PHRASES.push('Qui tot ho vol, tot ho perd.','Aigua que no has de beure, deixa-la córrer.','Cada ovella amb la seva parella.','De mica en mica s’omple la pica.','Qui ho prova, ho sap.','Al pot petit hi ha la bona confitura.','Qui la fa, la paga.','Demà serà un altre dia.','Les lletres també tenen caràcter.','Un petit gest pot canviar tot el dia.','Barcelona fa olor de mar i de pa calent.','Avui plou, però demà farà sol.','Quan el gat no hi és, els ratolins ballen.','Qui canta, els seus mals espanta.','Tots els camins porten a Roma.','Una imatge val més que mil paraules.','La paciència és la mare de la ciència.','Obrir un llibre és obrir una finestra.','Cada pàgina és un petit món.','L’espai en blanc també diu coses.','Menys és més quan ho fas bé.','El detall fa la diferència.','Llegir és viatjar sense moure’s.','Les paraules se les endú el vent, la tinta no.','Sense contrast no hi ha jerarquia.','Un bon títol crida l’atenció del lector.','Escriu clar i et llegiran.','Tinta, paper i una mica de paciència.','La lletra petita sempre té la darrera paraula.','Cap lletra no està sola: sempre en té una al costat.','Mesura les paraules abans de dibuixar-les.','Fer castells és cosa de tots.','Bon dia, com va tot per aquí?','Aquest estiu anirem a la platja.','Una bona idea no té pressa.','Qui més corre, més s’entrebanca.','Això és tan clar com l’aigua.','No tot el que lluu és or.');
+const YR={'EB Garamond':'c. 1530','Cormorant Garamond':'2015','Crimson Text':'2010','Sorts Mill Goudy':'1915','IM Fell English':'c. 1670','Goudy Bookletter 1911':'1911','Linden Hill':'1927','Baskervville':'1757','Libre Baskerville':'1757','Libre Caslon Text':'1722','PT Serif':'2010','Source Serif 4':'2014','Playfair Display':'2011','Bodoni Moda':'c. 1790','Libre Bodoni':'c. 1790','Abril Fatface':'2011','Rokkitt':'2011','Zilla Slab':'2017','Roboto Slab':'2013','Arvo':'2010','Bitter':'2011','Oswald':'2011','Anton':'2011','Bebas Neue':'2010','Libre Franklin':'1902','Barlow Condensed':'2017','Inter':'2016','Roboto':'2011','Work Sans':'2015','IBM Plex Sans':'2017','Cabin':'2010','Lato':'2010','Open Sans':'2011','Fira Sans':'2013','Ubuntu':'2010','Source Sans 3':'2012','Poppins':'2014','Montserrat':'2011','Raleway':'2010','Quicksand':'2008','Josefin Sans':'2010','Outfit':'2021','Dancing Script':'2010','Caveat':'2015','Pacifico':'2011','Lobster':'2010','Press Start 2P':'2012'};
+Object.assign(YR,{'ITC Franklin Gothic':'1902','American Typewriter':'1974','Archer':'2001','Rockwell':'1934','Didot':'c. 1784','Avenir':'1988','Frutiger':'1976','Gill Sans':'1928','Futura':'1927','Helvetica':'1957'});
+const yr=()=>YR[cur[2]]?' · '+YR[cur[2]]:'';
 const $=id=>document.getElementById(id);
 const famOpts=$('famOpts'),subOpts=$('subOpts'),subBox=$('subBox'),go=$('go'),foot=$('foot'),msg=$('msg'),phrase=$('phrase');
 let cur,last=-1,lastP=-1,done=false,fSel='',sSel='',xp=0,streak=0,n=0;
@@ -159,7 +171,7 @@ function newQ(){
   foot.className='';msg.innerHTML='';go.textContent='Comprova';go.disabled=true;
   phrase.style.opacity=0;
   const f=cur[2],show=()=>{phrase.style.fontFamily=`"${f}",${cur[3]}`;phrase.textContent=PHRASES[j];phrase.style.opacity=1;window.scrollTo({top:0,behavior:'smooth'})};
-  Promise.race([document.fonts.load(`32px "${f}"`),new Promise(r=>setTimeout(r,1200))]).then(show,show);
+  Promise.race([document.fonts.load(`32px "${f}"`),new Promise(r=>setTimeout(r,1200))]).then(show,()=>{if(LOCAL.has(f)){console.warn("Font no trobada: fonts/ per a "+f);FONTS.splice(FONTS.indexOf(cur),1);FONTS.length?newQ():phrase.textContent='No es troba cap font a la carpeta fonts/. Revisa els noms dels fitxers.'}else show()});
 }
 function verify(){
   done=true;n++;
@@ -173,7 +185,7 @@ function verify(){
   $('sXp').textContent=xp;$('sStreak').textContent=streak;after(perfect,prev);
   const sol=deco?FN.deco:`${FN[cur[0]]}, ${SN[cur[1]]}`;
   foot.className=perfect?'ok':'ko';
-  msg.innerHTML=perfect?`Perfecte! +${gain} XP<small>${cur[2]}</small>`:`Solució: ${sol}<small>Era ${cur[2]}${gain?` · +${gain} XP`:''}</small>`;
+  msg.innerHTML=perfect?`Perfecte! +${gain} XP<small>${cur[2]}${yr()}</small>`:`Solució: ${sol}<small>Era ${cur[2]}${yr()}${gain?` · +${gain} XP`:''}</small>`;
   go.textContent='Continua';go.disabled=false;go.focus();
 }
 let best=0,rec=false,tt=0,parts=[],raf=0;
