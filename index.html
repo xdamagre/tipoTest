@@ -243,8 +243,8 @@ function after(perfect,prev){
     }
   }
 }
-let mode='slides';
-try{mode=localStorage.getItem('tipo_mode')||'slides'}catch(e){}
+let mode='all';
+try{mode=localStorage.getItem('tipo_mode')||'all'}catch(e){}
 const modeB=$('mode');
 function setMode(m,user){
   mode=m;modeB.setAttribute('aria-checked',m==='slides');
