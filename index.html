@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Quina tipografia és?</title>
+<title>WTF? What The Font?</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=EB+Garamond&family=Cormorant+Garamond&family=Libre+Baskerville&family=Tinos&family=Playfair+Display&family=Bodoni+Moda&family=Rokkitt&family=Zilla+Slab&family=Oswald&family=Anton&family=Arimo&family=Inter&family=Cabin&family=Lato&family=Jost&family=Poppins&family=Pinyon+Script&family=Great+Vibes&family=Parisienne&family=Allura&family=UnifrakturCook:wght@700&family=Pirata+One&family=Caveat&family=Kaushan+Script&family=Creepster&family=Monoton&family=Special+Elite&family=Rubik+Glitch&display=swap">
 <style>
 :root{--bg:#fff;--card:#fff;--ink:#4b4b4b;--mute:#777;--line:#e5e5e5;--green:#58cc02;--green-d:#58a700;--okbg:#d7ffb8;--oktx:#58a700;--red:#ff4b4b;--red-d:#ea2b2b;--kobg:#ffdfe0;--kotx:#ea2b2b;--blue:#1cb0f6;--blue-d:#1899d6;--selbg:#ddf4ff;--seltx:#1899d6;--track:#e5e5e5}
@@ -87,6 +87,57 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 .sw[aria-checked=true] i{background:var(--green)}
 .sw[aria-checked=true] i::after{transform:translateX(18px)}
 .sw:focus-visible{outline:3px solid var(--blue);outline-offset:2px;border-radius:12px}
+.ic{font:inherit;font-size:20px;background:none;border:0;color:var(--mute);cursor:pointer;padding:4px 8px}
+#hud{max-width:720px;margin:0 auto;padding:8px 16px 0;display:flex;align-items:center;gap:12px;font-weight:800}
+#hud[hidden],.modal[hidden],section[hidden]{display:none}
+.tb{flex:1;height:14px;border-radius:99px;background:var(--track);overflow:hidden}
+.tb i{display:block;height:100%;width:100%;background:var(--blue);border-radius:99px;transition:width .1s linear}
+.tb.low i{background:var(--red)}
+#hudL,#hudR{min-width:58px}#hudR{text-align:right}
+#menu{position:relative}
+.mwrap{max-width:480px;margin:0 auto;padding:40px 16px 40px;text-align:center}
+.mwrap h1{font-size:68px;line-height:1;margin:10px 0 0;color:var(--green);font-weight:800}
+.mwrap h1 small{display:block;font-size:22px;color:var(--ink);margin-top:6px}
+.sub{color:var(--mute);margin:12px 0 26px}
+.mode{display:block;width:100%;text-align:left;padding:16px 18px;margin-bottom:12px}
+.mode b{font-size:20px;display:block}
+.mode span{font-weight:600;font-size:15px;color:var(--mute)}
+.gear{position:absolute;top:calc(8px + env(safe-area-inset-top,0px));right:10px;font-size:26px}
+#menu .sw{margin:14px auto 4px}
+.link{font:inherit;font-weight:800;color:var(--blue);background:none;border:0;cursor:pointer;padding:8px;text-decoration:underline}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:16px;z-index:30}
+.mbox{background:var(--bg);border:2px solid var(--line);border-radius:20px;padding:22px;max-width:420px;width:100%;max-height:90%;overflow:auto;text-align:left}
+.mbox h2{margin-top:0}.mbox p{margin:0 0 10px}
+.opts.three{grid-template-columns:repeat(3,1fr)}
+.go.full{width:100%;margin-top:14px}
+.big{font-size:56px;font-weight:800;color:var(--green);line-height:1.1}
+.sq{font-size:26px;letter-spacing:2px;margin:12px 0;word-break:break-all}
+#eH{color:var(--mute);font-size:15px;margin:14px 0}
+.top{display:grid;grid-template-columns:1fr auto 1fr;gap:8px}
+.top .ic{justify-self:start}.hs{justify-self:end}
+#flame{font-size:40px;line-height:1.1}
+#fe:not(:empty){margin-right:6px}
+.mode{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mt{min-width:0;text-align:left}
+.rec{font-size:40px;font-weight:800;line-height:1;color:var(--mute);flex:none}
+.mode .rec span{font-size:inherit;font-weight:800;color:inherit}
+[hidden]{display:none!important}
+.erow{display:flex;gap:12px;margin-top:12px}
+.erow .opt{flex:1;font-size:30px;padding:12px;line-height:1.2}
+.mbox .sw{margin:4px 0}
+#toast{z-index:40}
+#lb{margin:18px 0;text-align:left}
+#lb h3{text-align:center;margin:0 0 10px}
+#pubBox{display:flex;gap:8px;margin-bottom:8px}
+#nick{flex:1;min-width:0;font:inherit;padding:12px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+#pubBox .go{min-width:0;width:auto;padding:12px 18px;margin:0}
+#pubMsg{color:var(--kotx);font-size:14px}
+#lbL{list-style:none;margin:0;padding:0}
+#lbL li{display:flex;gap:10px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--line)}
+#lbL li b{width:26px;color:var(--mute)}
+#lbL li span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#lbL li em{font-style:normal;font-weight:800}
+#lbL li.me{background:var(--selbg);border-radius:10px}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Sorts+Mill+Goudy&family=IM+Fell+English&family=Cardo&family=Goudy+Bookletter+1911&family=Linden+Hill&family=Baskervville&family=Libre+Caslon+Text&family=Gelasio&family=PT+Serif&family=Source+Serif+4&family=Abril+Fatface&family=Libre+Bodoni&family=Gloock&family=Rozha+One&family=Prata&family=Roboto+Slab&family=Arvo&family=Bitter&family=Crete+Round&family=Aleo&family=Josefin+Slab&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fjalla+One&family=Libre+Franklin&family=Archivo+Black&family=Barlow+Condensed&family=Antonio&family=Roboto&family=Public+Sans&family=Work+Sans&family=IBM+Plex+Sans&family=Albert+Sans&family=Open+Sans&family=Fira+Sans&family=Alegreya+Sans&family=Ubuntu&family=Noto+Sans&family=Source+Sans+3&family=Montserrat&family=Raleway&family=Quicksand&family=Josefin+Sans&family=Outfit&family=Questrial&display=swap">
@@ -95,15 +146,45 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Meie+Script&display=swap">
 </head>
 <body>
-<div class="top"><span id="flame" class="st" title="Ratxa"><span id="fe">🔥</span> <span id="sStreak">0</span></span><span title="XP total">⭐ <span id="sXp">0</span></span><span title="Rècord de ratxa">🏆 <span id="sBest">0</span></span><button class="sw" id="mode" role="switch" aria-checked="true" title="Només les tipografies de les diapositives"><i></i><span id="modeT">Diapos</span></button></div>
+<canvas id="cv"></canvas><div id="toast" role="status"></div>
+<section id="menu">
+<button class="ic gear" id="gear" aria-label="Configuració">⚙️</button>
+<div class="mwrap">
+<h1>WTF?<small>What The Font?</small></h1>
+<p class="sub">Endevina la família tipogràfica i el subtipus.</p>
+<button class="opt mode" data-m="daily"><div class="mt"><b>Diari</b><span id="dSub"></span></div><div class="rec" id="dMark" role="img"></div></button>
+<button class="opt mode" data-m="inf"><div class="mt"><b>Infinit</b><span>Sense límit. Quina ratxa faràs?</span></div><div class="rec st" id="mInfR">🔥 <span id="mInf">0</span></div></button>
+<button class="opt mode" data-m="timed"><div class="mt"><b>Contrarellotge</b><span>3 vides i cada cop menys temps.</span></div><div class="rec st" id="mTimR"><span id="mTim">0</span></div></button>
+<button class="link" id="how">Com es juga</button>
+</div></section>
+<section id="gameV" hidden>
+<div class="top"><button class="ic" id="home" aria-label="Menú">✕</button><span id="flame" class="st" title="Puntuació actual"><span id="fe">🔥</span><span id="sStreak">0</span></span><span class="hs" title="Rècord">🏆 <span id="sBest">0</span></span></div>
+<div id="hud" hidden><span id="hudL"></span><div class="tb" id="tb"><i id="tbI"></i></div><span id="hudR"></span></div>
 <main>
   <h2>Quina tipografia és?</h2>
   <div id="phrase" aria-live="polite">…</div>
   <div class="opts" id="famOpts"></div>
   <div id="subBox" hidden><h3>I quin subtipus?</h3><div class="opts" id="subOpts"></div></div>
 </main>
-<canvas id="cv"></canvas><div id="toast" role="status"></div>
-<footer id="foot"><div class="fin"><div id="msg"></div><button class="go" id="go" disabled>Comprova</button></div></footer>
+<footer id="foot"><div class="fin"><div id="msg"></div><button class="go" id="go" disabled>Comprova</button></div></footer></section>
+<section id="end" hidden><div class="mwrap"><h2 id="eT"></h2><div class="big" id="eS"></div><div id="eX"></div><div class="sq" id="eSq"></div><div id="eH"></div>
+<div id="lb"><h3 id="lbT"></h3>
+<div id="pubBox"><input id="nick" maxlength="12" placeholder="El teu àlies" autocomplete="nickname"><button class="go" id="pub">Publica</button></div>
+<div id="pubMsg"></div><ol id="lbL"></ol></div>
+<button class="go full" id="copy">Copia el resultat</button>
+<div class="erow"><button class="opt" id="eHome" aria-label="Torna al menú" title="Torna al menú">⬅️</button><button class="opt" id="eAgain" aria-label="Torna a jugar" title="Torna a jugar">🔁</button></div></div></section>
+<div class="modal" id="set" hidden><div class="mbox"><h2>Configuració</h2>
+<button class="sw" id="snd" role="switch" aria-checked="true"><i></i><span id="sndT">Sons activats</span></button>
+<h3>Fonts</h3>
+<button class="sw" id="mode" role="switch" aria-checked="true"><i></i><span id="modeT">Només diapositives</span></button>
+<h3>Tema</h3><div class="opts three" id="themeB"><button class="opt" data-t="auto">Auto</button><button class="opt" data-t="light">Clar</button><button class="opt" data-t="dark">Fosc</button></div>
+<button class="go full" id="setX">Tanca</button></div></div>
+<div class="modal" id="howM" hidden><div class="mbox"><h2>Com es juga</h2>
+<p>Surt una frase escrita amb una tipografia. Tria la <b>família</b> i després el <b>subtipus</b> (Decorative no en té).</p>
+<p><b>Diari:</b> 10 fonts iguals per a tothom, un cop al dia. Guanyes amb més encerts i menys temps.</p>
+<p><b>Infinit:</b> sense límit, busca la ratxa més llarga.</p>
+<p><b>Contrarellotge:</b> 3 vides i cada cop menys temps per respondre.</p>
+<button class="go full" id="howX">Entesos</button></div></div>
 <script>
 const FN={serif:'Serif',sans:'Sans Serif',script:'Script',deco:'Decorative'};
 const SN={old:'Old style',trans:'Transitional',modern:'Modern',slab:'Slab',grot:'Grotesque',neo:'Neo-grotesque',human:'Humanist',geo:'Geometric',formal:'Formal',calli:'Calligraphic',black:'Blackletter',casual:'Casual'};
@@ -177,13 +258,13 @@ function pickF(v){
 }
 function newQ(){
   done=false;fSel=sSel='';
-  const P=FONTS.filter(f=>mode==='slides'?SLIDE.has(f[2]):true),i=rnd(P.length,P.indexOf(cur)),j=rnd(PHRASES.length,lastP);lastP=j;cur=P[i];
+  let j;if(gm==='daily'){cur=DQ[qn][0];j=DQ[qn][1]}else{const P=FONTS.filter(f=>mode==='slides'?SLIDE.has(f[2]):true),i=rnd(P.length,P.indexOf(cur));j=rnd(PHRASES.length,lastP);lastP=j;cur=P[i]}
   mk(famOpts,Object.entries(FN),pickF);
   subBox.hidden=true;subOpts.innerHTML='';
   foot.className='';msg.innerHTML='';go.textContent='Comprova';go.disabled=true;
   phrase.style.opacity=0;
-  const f=cur[2],show=()=>{phrase.style.fontFamily=`"${f}",${cur[3]}`;phrase.textContent=PHRASES[j];phrase.style.opacity=1;window.scrollTo({top:0,behavior:'smooth'})};
-  Promise.race([document.fonts.load(`32px "${f}"`),new Promise(r=>setTimeout(r,1200))]).then(show,()=>{if(LOCAL.has(f)){console.warn("Font no trobada a fonts/: "+f);FONTS.splice(FONTS.indexOf(cur),1);newQ()}else show()});
+  const f=cur[2],show=()=>{phrase.style.fontFamily=`"${f}",${cur[3]}`;phrase.textContent=PHRASES[j];phrase.style.opacity=1;window.scrollTo({top:0,behavior:'smooth'});tStart()};
+  Promise.race([document.fonts.load(`32px "${f}"`),new Promise(r=>setTimeout(r,1200))]).then(show,()=>{if(LOCAL.has(f)&&gm!=='daily'){console.warn("Font no trobada a fonts/: "+f);FONTS.splice(FONTS.indexOf(cur),1);newQ()}else show()});
 }
 function verify(){
   done=true;n++;
@@ -194,16 +275,16 @@ function verify(){
   const gain=deco?(okF?10:0):(okF?5:0)+(okF&&okS?5:0);
   const perfect=okF&&okS;
   const prev=streak;xp+=gain;streak=perfect?streak+1:0;
-  $('sXp').textContent=xp;$('sStreak').textContent=streak;after(perfect,prev);
+  $('sStreak').textContent=streak;after(perfect,prev);onResult(perfect);
   const sol=deco?FN.deco:`${FN[cur[0]]}, ${SN[cur[1]]}`;
   foot.className=perfect?'ok':'ko';
-  msg.innerHTML=perfect?`Perfecte! +${gain} XP<small>${cur[2]}${yr()}</small>`:`Solució: ${sol}<small>Era ${cur[2]}${yr()}${gain?` · +${gain} XP`:''}</small>`;
+  msg.innerHTML=perfect?`Perfecte!<small>${cur[2]}${yr()}</small>`:`Solució: ${sol}<small>Era ${cur[2]}${yr()}</small>`;
   go.textContent='Continua';go.disabled=false;go.focus();
 }
 let best=0,rec=false,tt=0,parts=[],raf=0;
 const calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 try{best=+localStorage.getItem('tipo_best')||0;xp=+localStorage.getItem('tipo_xp')||0}catch(e){}
-$('sBest').textContent=best;$('sXp').textContent=xp;
+$('sBest').textContent=best;
 const cv=$('cv'),cx=cv.getContext('2d');
 function fit(){cv.width=innerWidth;cv.height=innerHeight}
 addEventListener('resize',fit);fit();
@@ -230,33 +311,211 @@ function after(perfect,prev){
   if(perfect){
     fl.classList.remove('bump');void fl.offsetWidth;fl.classList.add('bump');
     const old=best;
-    if(streak>best){best=streak;$('sBest').textContent=best;try{localStorage.setItem('tipo_best',best)}catch(e){}}
-    if(streak>old&&old>=3&&!rec){rec=true;toast(`Nou rècord: ${streak}! 🏆`,'gold');confetti(16)}
+    if(gm==='inf'&&streak>best){best=streak;$('sBest').textContent=best;try{localStorage.setItem('tipo_best',best)}catch(e){}}
+    if(gm==='inf'&&streak>old&&old>=3&&!rec){rec=true;toast(`Nou rècord: ${streak}! 🏆`,'gold');confetti(16)}
     else if(streak===3||streak%5===0){toast(MS[streak]||`Ratxa de ${streak}!`,'fire');confetti(8+streak)}
     else confetti(Math.min(streak,6));
   }else{
     rec=false;
-    if(prev>=2){
+    if(gm==='inf'&&prev>=2){
       $('fe').textContent='💨';fl.classList.add('burn');foot.classList.add('shake');
       toast(`Ratxa de ${prev} perduda 💔`,'sad');
       setTimeout(()=>{fl.classList.remove('burn');$('fe').textContent='🔥';foot.classList.remove('shake')},1300);
     }
   }
 }
-let mode='all';
-try{mode=localStorage.getItem('tipo_mode')||'all'}catch(e){}
+let mode='slides';
+try{mode=localStorage.getItem('tipo_mode')||'slides'}catch(e){}
 const modeB=$('mode');
 function setMode(m,user){
   mode=m;modeB.setAttribute('aria-checked',m==='slides');
-  $('modeT').textContent=m==='slides'?'Diapos':'Totes';
+  $('modeT').textContent=m==='slides'?'Només diapositives':'Totes les fonts';
   try{localStorage.setItem('tipo_mode',m)}catch(e){}
-  if(user){toast(m==='slides'?'Només les tipografies de les diapositives':'Totes les tipografies','fire');if(!done)newQ()}
+  if(user){toast(m==='slides'?'Només les tipografies de les diapositives':'Totes les tipografies','fire')}
 }
 modeB.onclick=()=>setMode(mode==='slides'?'all':'slides',true);
 setMode(mode,false);
-go.onclick=()=>done?newQ():verify();
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!go.disabled&&document.activeElement!==go){e.preventDefault();go.click()}});
-newQ();
+const FONTS0=FONTS.slice();
+const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let gm='inf',DQ=[],qn=0,lives=3,score=0,res=[],tS=0,tAcc=0,tI=0,tLim=0,nr=false,shareT='';
+let DH=ld('wtf_daily',{}),tb=ld('wtf_tbest',0),sndOn=ld('wtf_snd',true);
+const tierOf=(v,t)=>v>=t[2]?3:v>=t[1]?2:v>=t[0]?1:0;
+const dBest=()=>Math.max(0,...Object.values(DH).map(x=>x.s));
+function setCur(){
+  $('sStreak').textContent=score;$('fe').textContent='';
+  const f=$('flame'),b=f.classList.contains('bump');
+  f.className='st t'+tierOf(score,gm==='timed'?[5,10,20]:[5,8,10])+(b?' bump':'');
+}
+const fmt=ms=>(ms/1000).toFixed(1)+' s';
+const today=()=>new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Madrid'});
+function rng(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function buildDQ(d){
+  const h=[...d].reduce((h,c)=>Math.imul(h^c.charCodeAt(0),16777619),2166136261),r=rng(h),idx=FONTS0.map((_,i)=>i);
+  for(let i=idx.length-1;i>0;i--){const k=Math.floor(r()*(i+1));[idx[i],idx[k]]=[idx[k],idx[i]]}
+  DQ=idx.slice(0,10).map(i=>[FONTS0[i],Math.floor(r()*PHRASES.length)]);
+}
+const preload=names=>Promise.all(names.map(n=>Promise.race([document.fonts.load('32px "'+n+'"'),new Promise(r=>setTimeout(r,4000))]).catch(()=>{})));
+let AC;
+function snd(k){
+  if(!sndOn)return;
+  try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();
+    const q={ok:[[660,.09],[880,.14]],ko:[[220,.18],[160,.25]],win:[[523,.1],[659,.1],[784,.25]]}[k];let t=AC.currentTime;
+    q.forEach(([f,d])=>{const o=AC.createOscillator(),g=AC.createGain();o.type=k==='ko'?'sawtooth':'sine';o.frequency.value=f;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d);t+=d*.9})}catch(e){}
+}
+function show(v){['menu','gameV','end'].forEach(x=>$(x).hidden=x!==v);window.scrollTo(0,0)}
+function menuInfo(){
+  $('mInf').textContent=best;$('mTim').textContent=tb;
+  $('mInfR').className='rec st t'+tierOf(best,[3,5,10]);$('mTimR').className='rec st t'+tierOf(tb,[5,10,20]);
+  const x=DH[today()];
+  $('dSub').textContent='10 fonts que canvien cada dia';
+  $('dMark').textContent=x?'✅':'➡️';$('dMark').setAttribute('aria-label',x?'Ja jugat avui':'Pendent');
+}
+function tStart(){
+  if(gm==='inf')return;
+  $('hudL').textContent=gm==='daily'?(qn+1)+'/10':'❤️'.repeat(lives)+'🖤'.repeat(3-lives);
+  tS=performance.now();clearInterval(tI);
+  if(gm==='timed')tLim=Math.max(4,15-.5*qn)*1000;
+  tI=setInterval(tk,100);tk();
+}
+function tStop(){clearInterval(tI);if(gm==='daily')tAcc+=performance.now()-tS}
+function tk(){
+  const e=performance.now()-tS;
+  if(gm==='timed'){
+    const l=tLim-e;
+    $('tbI').style.width=Math.max(0,l/tLim*100)+'%';$('tb').classList.toggle('low',l<3000);
+    $('hudR').textContent=(Math.max(0,l)/1000).toFixed(1)+'s';
+    if(l<=0&&!done){clearInterval(tI);verify();msg.innerHTML=msg.innerHTML.replace('Solució','Temps esgotat · Solució')}
+  }else $('hudR').textContent=fmt(tAcc+e);
+}
+function onResult(p){
+  tStop();snd(p?'ok':'ko');
+  if(p)score++;
+  if(gm==='daily'){res.push(p);$('tbI').style.width=((qn+1)*10)+'%';$('hudR').textContent=fmt(tAcc)}
+  if(gm!=='inf'){setCur();$('sBest').textContent=Math.max(gm==='timed'?tb:dBest(),score)}
+  if(gm==='timed'&&!p){lives--;$('hudL').textContent='❤️'.repeat(lives)+'🖤'.repeat(3-lives)}
+}
+function saveRun(){
+  const d=today();
+  if(gm==='daily'&&!DH[d]){DH[d]={s:score,t:Math.round(tAcc),r:res.map(Number).join('')};sv('wtf_daily',DH)}
+  if(gm==='timed'&&score>tb){tb=score;sv('wtf_tbest',tb);nr=true}
+}
+function finish(){saveRun();showEnd(false)}
+function next(){
+  if(gm!=='inf'){qn++;if((gm==='daily'&&qn>=10)||(gm==='timed'&&lives<=0))return finish()}
+  newQ();
+}
+function showEnd(old){
+  show('end');setTimeout(lbInit,0);
+  if(gm==='daily'){
+    const d=today(),x=DH[d];
+    $('eT').textContent='Diari · '+d;$('eS').textContent=x.s+'/10';
+    $('eX').textContent=fmt(x.t)+(old?' · Ja has jugat avui. Torna demà!':'');
+    $('eSq').textContent=[...x.r].map(c=>c==='1'?'🟩':'🟥').join('');
+    shareT='WTF? What The Font? · '+d+'\n'+$('eSq').textContent+'\n'+x.s+'/10 · '+fmt(x.t);
+    $('eH').innerHTML=Object.keys(DH).sort().reverse().slice(0,7).map(k=>k+': '+DH[k].s+'/10 · '+fmt(DH[k].t)).join('<br>');
+    $('eAgain').hidden=true;
+    if(!old&&x.s>=8){confetti(14);snd('win')}
+  }else{
+    $('eT').textContent='Contrarellotge';$('eS').textContent=score;
+    $('eX').textContent=nr?'Nou rècord! 🏆':'Rècord: '+tb;$('eSq').textContent='';$('eH').innerHTML='';
+    shareT='WTF? What The Font? · Contrarellotge · '+score+' encerts';
+    $('eAgain').hidden=false;
+    if(nr){confetti(16);snd('win')}
+  }
+}
+function start(m){
+  gm=m;score=0;qn=0;lives=3;res=[];tAcc=0;streak=0;rec=false;nr=false;subRun=false;done=true;
+  $('sStreak').textContent=0;$('flame').className='st';$('fe').textContent=m==='inf'?'🔥':'';
+  $('sBest').textContent=m==='inf'?best:m==='timed'?tb:dBest();
+  $('hud').hidden=m==='inf';$('tb').classList.remove('low');$('tbI').style.width=m==='timed'?'100%':'0%';
+  if(m==='daily'){
+    if(DH[today()]){showEnd(true);return}
+    buildDQ(today());show('gameV');
+    phrase.style.fontFamily='';phrase.textContent='Preparant…';famOpts.innerHTML='';subBox.hidden=true;go.disabled=true;foot.className='';msg.innerHTML='';
+    preload(DQ.map(q=>q[0][2])).then(newQ);return;
+  }
+  show('gameV');newQ();
+}
+document.querySelectorAll('.mode[data-m]').forEach(b=>b.onclick=()=>start(b.dataset.m));
+$('home').onclick=()=>{
+  if(gm==='daily'&&!DH[today()]){if(!confirm('Si surts, el Diari es dona per jugat avui. Vols sortir?'))return;tStop();saveRun()}
+  else if(gm==='timed'){tStop();saveRun()}
+  else tStop();
+  menuInfo();show('menu');
+};
+$('eHome').onclick=()=>{menuInfo();show('menu')};
+$('eAgain').onclick=()=>start('timed');
+$('copy').onclick=async()=>{try{await navigator.clipboard.writeText(shareT);toast('Copiat!','fire')}catch(e){toast('No s’ha pogut copiar','sad')}};
+const modal=(id,open,close)=>{const m=$(id);$(open).onclick=()=>m.hidden=false;$(close).onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true}};
+modal('set','gear','setX');modal('howM','how','howX');
+function setSnd(v,u){sndOn=v;$('snd').setAttribute('aria-checked',v);$('sndT').textContent=v?'Sons activats':'Sons desactivats';sv('wtf_snd',v);if(u&&v)snd('ok')}
+$('snd').onclick=()=>setSnd(!sndOn,true);setSnd(sndOn,false);
+function setTheme(t){
+  document.documentElement.removeAttribute('data-theme');if(t!=='auto')document.documentElement.dataset.theme=t;
+  sv('wtf_theme',t);$('themeB').querySelectorAll('.opt').forEach(b=>b.classList.toggle('sel',b.dataset.t===t));
+}
+$('themeB').querySelectorAll('.opt').forEach(b=>b.onclick=()=>setTheme(b.dataset.t));
+setTheme(ld('wtf_theme','auto'));
+let subRun=false,FB=null;
+const FBC={apiKey:"AIzaSyAJWyd55TvHzUMYC9LCqBghS3k-OOzBjfA",authDomain:"wtf-what-the-font.firebaseapp.com",projectId:"wtf-what-the-font",storageBucket:"wtf-what-the-font.firebasestorage.app",messagingSenderId:"341599733645",appId:"1:341599733645:web:d17801e815e0f1c59ddfc4"};
+async function fb(){
+  if(FB)return FB;
+  const B='https://www.gstatic.com/firebasejs/13.1.0/';
+  const [a,f]=await Promise.all([import(B+'firebase-app.js'),import(B+'firebase-firestore.js')]);
+  return FB={f,db:f.getFirestore(a.initializeApp(FBC))};
+}
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const NICK=/^[A-Za-zÀ-ÿ0-9 _.-]{1,12}$/;
+function lbInit(){
+  const d=today(),canPub=gm==='daily'?!ld('wtf_sub_'+d,null):(score>0&&!subRun);
+  $('pubBox').hidden=!canPub;$('pub').disabled=false;$('pubMsg').textContent='';
+  $('nick').value=ld('wtf_nick','');
+  $('lbT').textContent=gm==='daily'?'Rànquing d’avui':'Millors puntuacions';
+  loadLB();
+}
+async function loadLB(){
+  const L=$('lbL'),me=(ld('wtf_nick','')||'').toLowerCase();
+  L.innerHTML='<li>Carregant…</li>';
+  try{
+    const {f,db}=await fb();let rows;
+    if(gm==='daily'){
+      const q=f.query(f.collection(db,'daily'),f.where('date','==',today()));
+      rows=(await f.getDocs(q)).docs.map(d=>d.data()).sort((a,b)=>b.s-a.s||a.t-b.t).slice(0,20);
+    }else{
+      const q=f.query(f.collection(db,'timed'),f.orderBy('s','desc'),f.limit(20));
+      rows=(await f.getDocs(q)).docs.map(d=>d.data());
+    }
+    L.innerHTML=rows.length?rows.map((r,i)=>'<li'+(r.nick.toLowerCase()===me?' class="me"':'')+'><b>'+(i+1)+'</b><span>'+esc(r.nick)+'</span><em>'+(gm==='daily'?r.s+'/10 · '+fmt(r.t):r.s)+'</em></li>').join(''):'<li>Encara no hi ha cap resultat. Sigues el primer!</li>';
+  }catch(e){console.warn(e);L.innerHTML='<li>No s’ha pogut carregar el rànquing.</li>'}
+}
+async function publish(){
+  const nick=$('nick').value.trim();
+  if(!NICK.test(nick)){$('pubMsg').textContent='Àlies: 1-12 caràcters (lletres, números, espai, punt, guió o guió baix).';return}
+  $('pub').disabled=true;$('pubMsg').textContent='';
+  try{
+    const {f,db}=await fb(),d=today();
+    if(gm==='daily'){
+      const x=DH[d];
+      await f.setDoc(f.doc(db,'daily',d+'_'+nick.toLowerCase()),{date:d,nick,s:x.s,t:x.t,ts:f.serverTimestamp()});
+      sv('wtf_sub_'+d,nick);
+    }else{
+      await f.addDoc(f.collection(db,'timed'),{nick,s:score,ts:f.serverTimestamp()});
+      subRun=true;
+    }
+    sv('wtf_nick',nick);$('pubBox').hidden=true;toast('Publicat!','fire');
+  }catch(e){
+    console.warn(e);$('pub').disabled=false;
+    $('pubMsg').textContent=gm==='daily'?'No s’ha pogut publicar. Potser aquest àlies ja s’ha usat avui: prova’n un altre.':'No s’ha pogut publicar. Torna-ho a provar.';
+    return;
+  }
+  loadLB();
+}
+$('pub').onclick=publish;
+$('nick').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();publish()}});
+go.onclick=()=>{if(!done)verify();else next()};
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!$('gameV').hidden&&!go.disabled&&document.activeElement!==go){e.preventDefault();go.click()}});
+menuInfo();show('menu');
 </script>
 </body>
 </html>
