@@ -138,6 +138,18 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 #lbL li span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #lbL li em{font-style:normal;font-weight:800}
 #lbL li.me{background:var(--selbg);border-radius:10px}
+.pod{display:flex;align-items:flex-end;justify-content:center;gap:8px;margin:8px 0 14px}
+.pc{flex:1;max-width:120px;text-align:center;min-width:0}
+.pn{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ps{font-size:14px;color:var(--mute);margin-bottom:4px}
+.pb{border-radius:12px 12px 0 0;font-size:30px;padding-top:6px}
+.p1 .pb{height:96px;background:#ffc800}.p2 .pb{height:72px;background:#c0c7cf}.p3 .pb{height:56px;background:#d99a5b}
+.pc.mine .pn{color:var(--green)}
+#lbL{max-height:140px;overflow-y:auto}#lbL:empty{display:none}
+#me{display:flex;gap:10px;align-items:center;margin-top:12px;padding:10px 18px;border:3px solid var(--green);border-radius:99px;font-weight:800}
+#me span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#menu #nick{width:100%;margin:0 0 18px;text-align:center;flex:none}
+#nick.bad{border-color:var(--red)}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Sorts+Mill+Goudy&family=IM+Fell+English&family=Cardo&family=Goudy+Bookletter+1911&family=Linden+Hill&family=Baskervville&family=Libre+Caslon+Text&family=Gelasio&family=PT+Serif&family=Source+Serif+4&family=Abril+Fatface&family=Libre+Bodoni&family=Gloock&family=Rozha+One&family=Prata&family=Roboto+Slab&family=Arvo&family=Bitter&family=Crete+Round&family=Aleo&family=Josefin+Slab&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fjalla+One&family=Libre+Franklin&family=Archivo+Black&family=Barlow+Condensed&family=Antonio&family=Roboto&family=Public+Sans&family=Work+Sans&family=IBM+Plex+Sans&family=Albert+Sans&family=Open+Sans&family=Fira+Sans&family=Alegreya+Sans&family=Ubuntu&family=Noto+Sans&family=Source+Sans+3&family=Montserrat&family=Raleway&family=Quicksand&family=Josefin+Sans&family=Outfit&family=Questrial&display=swap">
@@ -152,6 +164,7 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 <div class="mwrap">
 <h1>WTF?<small>What The Font?</small></h1>
 <p class="sub">Endevina la família tipogràfica i el subtipus.</p>
+<input id="nick" maxlength="12" placeholder="El teu àlies" autocomplete="nickname" aria-label="El teu àlies">
 <button class="opt mode" data-m="daily"><div class="mt"><b>Diari</b><span id="dSub"></span></div><div class="rec" id="dMark" role="img"></div></button>
 <button class="opt mode" data-m="inf"><div class="mt"><b>Infinit</b><span>Sense límit. Quina ratxa faràs?</span></div><div class="rec st" id="mInfR">🔥 <span id="mInf">0</span></div></button>
 <button class="opt mode" data-m="timed"><div class="mt"><b>Contrarellotge</b><span>3 vides i cada cop menys temps.</span></div><div class="rec st" id="mTimR"><span id="mTim">0</span></div></button>
@@ -168,9 +181,7 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 </main>
 <footer id="foot"><div class="fin"><div id="msg"></div><button class="go" id="go" disabled>Comprova</button></div></footer></section>
 <section id="end" hidden><div class="mwrap"><h2 id="eT"></h2><div class="big" id="eS"></div><div id="eX"></div><div class="sq" id="eSq"></div><div id="eH"></div>
-<div id="lb"><h3 id="lbT"></h3>
-<div id="pubBox"><input id="nick" maxlength="12" placeholder="El teu àlies" autocomplete="nickname"><button class="go" id="pub">Publica</button></div>
-<div id="pubMsg"></div><ol id="lbL"></ol></div>
+<div id="lb"><h3 id="lbT"></h3><div id="pod"></div><ol id="lbL"></ol><div id="me" hidden></div><div id="pubMsg"></div></div>
 <button class="go full" id="copy">Copia el resultat</button>
 <div class="erow"><button class="opt" id="eHome" aria-label="Torna al menú" title="Torna al menú">⬅️</button><button class="opt" id="eAgain" aria-label="Torna a jugar" title="Torna a jugar">🔁</button></div></div></section>
 <div class="modal" id="set" hidden><div class="mbox"><h2>Configuració</h2>
@@ -389,7 +400,8 @@ function tk(){
   }else $('hudR').textContent=fmt(tAcc+e);
 }
 function onResult(p){
-  tStop();snd(p?'ok':'ko');
+  tStop();snd(p?'ok':'ko');ans++;
+  if(gm==='inf'){if(p){if(streak>sess)sess=streak}else pushInf()}
   if(p)score++;
   if(gm==='daily'){res.push(p);$('tbI').style.width=((qn+1)*10)+'%';$('hudR').textContent=fmt(tAcc)}
   if(gm!=='inf'){setCur();$('sBest').textContent=Math.max(gm==='timed'?tb:dBest(),score)}
@@ -417,15 +429,18 @@ function showEnd(old){
     $('eAgain').hidden=true;
     if(!old&&x.s>=8){confetti(14);snd('win')}
   }else{
-    $('eT').textContent='Contrarellotge';$('eS').textContent=score;
-    $('eX').textContent=nr?'Nou rècord! 🏆':'Rècord: '+tb;$('eSq').textContent='';$('eH').innerHTML='';
-    shareT='WTF? What The Font? · Contrarellotge · '+score+' encerts';
+    $('eT').textContent=gm==='inf'?'Infinit':'Contrarellotge';$('eS').textContent=gm==='inf'?sess:score;
+    $('eX').textContent=gm==='inf'?'Millor ratxa d’aquesta sessió':nr?'Nou rècord! 🏆':'Rècord: '+tb;$('eSq').textContent='';$('eH').innerHTML='';
+    shareT=gm==='inf'?'WTF? What The Font? · Infinit · ratxa de '+sess:'WTF? What The Font? · Contrarellotge · '+score+' encerts';
     $('eAgain').hidden=false;
     if(nr){confetti(16);snd('win')}
   }
 }
 function start(m){
-  gm=m;score=0;qn=0;lives=3;res=[];tAcc=0;streak=0;rec=false;nr=false;subRun=false;done=true;
+  const nk=myNick();
+  if(!NICK.test(nk)){const n=$('nick');if($('menu').hidden)show('menu');n.classList.add('bad');n.focus();toast('Escriu primer el teu àlies','sad');return}
+  sv('wtf_nick',nk);runNick=nk;
+  gm=m;score=0;qn=0;lives=3;res=[];tAcc=0;streak=0;rec=false;nr=false;subRun=false;sess=0;ans=0;done=true;
   $('sStreak').textContent=0;$('flame').className='st';$('fe').textContent=m==='inf'?'🔥':'';
   $('sBest').textContent=m==='inf'?best:m==='timed'?tb:dBest();
   $('hud').hidden=m==='inf';$('tb').classList.remove('low');$('tbI').style.width=m==='timed'?'100%':'0%';
@@ -439,13 +454,14 @@ function start(m){
 }
 document.querySelectorAll('.mode[data-m]').forEach(b=>b.onclick=()=>start(b.dataset.m));
 $('home').onclick=()=>{
-  if(gm==='daily'&&!DH[today()]){if(!confirm('Si surts, el Diari es dona per jugat avui. Vols sortir?'))return;tStop();saveRun()}
-  else if(gm==='timed'){tStop();saveRun()}
-  else tStop();
+  if(gm==='daily'&&!DH[today()]){if(!confirm('Si surts, el Diari es dona per jugat avui. Vols sortir?'))return;tStop();saveRun();showEnd(false);return}
+  tStop();
+  if(gm==='timed')saveRun();
+  if(gm!=='daily'&&ans>0){showEnd(false);return}
   menuInfo();show('menu');
 };
 $('eHome').onclick=()=>{menuInfo();show('menu')};
-$('eAgain').onclick=()=>start('timed');
+$('eAgain').onclick=()=>start(gm);
 $('copy').onclick=async()=>{try{await navigator.clipboard.writeText(shareT);toast('Copiat!','fire')}catch(e){toast('No s’ha pogut copiar','sad')}};
 const modal=(id,open,close)=>{const m=$(id);$(open).onclick=()=>m.hidden=false;$(close).onclick=()=>m.hidden=true;m.onclick=e=>{if(e.target===m)m.hidden=true}};
 modal('set','gear','setX');modal('howM','how','howX');
@@ -457,7 +473,7 @@ function setTheme(t){
 }
 $('themeB').querySelectorAll('.opt').forEach(b=>b.onclick=()=>setTheme(b.dataset.t));
 setTheme(ld('wtf_theme','auto'));
-let subRun=false,FB=null;
+let subRun=false,FB=null,sess=0,ans=0,runNick='',lbTok=0;
 const FBC={apiKey:"AIzaSyAJWyd55TvHzUMYC9LCqBghS3k-OOzBjfA",authDomain:"wtf-what-the-font.firebaseapp.com",projectId:"wtf-what-the-font",storageBucket:"wtf-what-the-font.firebasestorage.app",messagingSenderId:"341599733645",appId:"1:341599733645:web:d17801e815e0f1c59ddfc4"};
 async function fb(){
   if(FB)return FB;
@@ -467,52 +483,49 @@ async function fb(){
 }
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const NICK=/^[A-Za-zÀ-ÿ0-9 _.-]{1,12}$/;
-function lbInit(){
-  const d=today(),canPub=gm==='daily'?!ld('wtf_sub_'+d,null):(score>0&&!subRun);
-  $('pubBox').hidden=!canPub;$('pub').disabled=false;$('pubMsg').textContent='';
-  $('nick').value=ld('wtf_nick','');
-  $('lbT').textContent=gm==='daily'?'Rànquing d’avui':'Millors puntuacions';
-  loadLB();
+const myNick=()=>($('nick').value||'').trim();
+$('nick').value=ld('wtf_nick','');
+$('nick').addEventListener('input',()=>$('nick').classList.remove('bad'));
+async function pushInf(){
+  const nick=runNick,k='wtf_inf_'+nick.toLowerCase();
+  if(!nick||sess<=ld(k,0))return;
+  try{const {f,db}=await fb();await f.setDoc(f.doc(db,'inf',nick.toLowerCase()),{nick,s:sess,ts:f.serverTimestamp()});sv(k,sess)}catch(e){console.warn(e)}
 }
-async function loadLB(){
-  const L=$('lbL'),me=(ld('wtf_nick','')||'').toLowerCase();
-  L.innerHTML='<li>Carregant…</li>';
+async function lbInit(){
+  const g=gm,d=today(),nick=runNick,tok=++lbTok,ok=()=>tok===lbTok;
+  $('lbT').textContent={daily:'Rànquing d’avui',timed:'Millors puntuacions',inf:'Millors ratxes'}[g];
+  $('pod').innerHTML='';$('lbL').innerHTML='<li>Carregant…</li>';$('me').hidden=true;$('pubMsg').textContent='';
+  const mine=g==='daily'?{s:DH[d].s,t:DH[d].t}:{s:g==='inf'?sess:score};
   try{
-    const {f,db}=await fb();let rows;
-    if(gm==='daily'){
-      const q=f.query(f.collection(db,'daily'),f.where('date','==',today()));
-      rows=(await f.getDocs(q)).docs.map(d=>d.data()).sort((a,b)=>b.s-a.s||a.t-b.t).slice(0,20);
-    }else{
-      const q=f.query(f.collection(db,'timed'),f.orderBy('s','desc'),f.limit(20));
-      rows=(await f.getDocs(q)).docs.map(d=>d.data());
+    const {f,db}=await fb();
+    try{
+      if(g==='daily'){if(!ld('wtf_sub_'+d,null)){await f.setDoc(f.doc(db,'daily',d+'_'+nick.toLowerCase()),{date:d,nick,s:mine.s,t:mine.t,ts:f.serverTimestamp()});sv('wtf_sub_'+d,nick)}}
+      else if(g==='timed'){if(mine.s>0&&!subRun){subRun=true;await f.addDoc(f.collection(db,'timed'),{nick,s:mine.s,ts:f.serverTimestamp()})}}
+      else await pushInf();
+    }catch(e){
+      console.warn(e);if(g==='timed')subRun=false;
+      if(ok())$('pubMsg').textContent=g==='daily'?'No s’ha pogut guardar: potser aquest àlies ja s’ha usat avui.':'No s’ha pogut guardar la puntuació.';
     }
-    L.innerHTML=rows.length?rows.map((r,i)=>'<li'+(r.nick.toLowerCase()===me?' class="me"':'')+'><b>'+(i+1)+'</b><span>'+esc(r.nick)+'</span><em>'+(gm==='daily'?r.s+'/10 · '+fmt(r.t):r.s)+'</em></li>').join(''):'<li>Encara no hi ha cap resultat. Sigues el primer!</li>';
-  }catch(e){console.warn(e);L.innerHTML='<li>No s’ha pogut carregar el rànquing.</li>'}
-}
-async function publish(){
-  const nick=$('nick').value.trim();
-  if(!NICK.test(nick)){$('pubMsg').textContent='Àlies: 1-12 caràcters (lletres, números, espai, punt, guió o guió baix).';return}
-  $('pub').disabled=true;$('pubMsg').textContent='';
-  try{
-    const {f,db}=await fb(),d=today();
-    if(gm==='daily'){
-      const x=DH[d];
-      await f.setDoc(f.doc(db,'daily',d+'_'+nick.toLowerCase()),{date:d,nick,s:x.s,t:x.t,ts:f.serverTimestamp()});
-      sv('wtf_sub_'+d,nick);
+    let rows,rank;
+    if(g==='daily'){
+      rows=(await f.getDocs(f.query(f.collection(db,'daily'),f.where('date','==',d),f.limit(200)))).docs.map(x=>x.data()).sort((a,b)=>b.s-a.s||a.t-b.t);
+      rank=rows.filter(r=>r.s>mine.s||(r.s===mine.s&&r.t<mine.t)).length+1;
     }else{
-      await f.addDoc(f.collection(db,'timed'),{nick,s:score,ts:f.serverTimestamp()});
-      subRun=true;
+      rows=(await f.getDocs(f.query(f.collection(db,g),f.orderBy('s','desc'),f.limit(50)))).docs.map(x=>x.data());
+      try{rank=(await f.getCountFromServer(f.query(f.collection(db,g),f.where('s','>',mine.s)))).data().count+1}
+      catch(e){rank=rows.filter(r=>r.s>mine.s).length+1}
     }
-    sv('wtf_nick',nick);$('pubBox').hidden=true;toast('Publicat!','fire');
-  }catch(e){
-    console.warn(e);$('pub').disabled=false;
-    $('pubMsg').textContent=gm==='daily'?'No s’ha pogut publicar. Potser aquest àlies ja s’ha usat avui: prova’n un altre.':'No s’ha pogut publicar. Torna-ho a provar.';
-    return;
-  }
-  loadLB();
+    if(ok())renderLB(rows,g,mine,rank,nick);
+  }catch(e){console.warn(e);if(ok())$('lbL').innerHTML='<li>No s’ha pogut carregar el rànquing.</li>'}
 }
-$('pub').onclick=publish;
-$('nick').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();e.stopPropagation();publish()}});
+function renderLB(rows,g,mine,rank,nick){
+  const val=r=>g==='daily'?r.s+'/10 · '+fmt(r.t):String(r.s),me=nick.toLowerCase(),med=['🥇','🥈','🥉'];
+  $('pod').innerHTML=rows.length?'<div class="pod">'+[1,0,2].map(i=>rows[i]?'<div class="pc p'+(i+1)+(rows[i].nick.toLowerCase()===me?' mine':'')+'"><div class="pn">'+esc(rows[i].nick)+'</div><div class="ps">'+val(rows[i])+'</div><div class="pb">'+med[i]+'</div></div>':'').join('')+'</div>':'';
+  $('lbL').innerHTML=rows.length?rows.slice(3).map((r,i)=>'<li'+(r.nick.toLowerCase()===me?' class="me"':'')+'><b>'+(i+4)+'</b><span>'+esc(r.nick)+'</span><em>'+val(r)+'</em></li>').join(''):'<li>Encara no hi ha cap resultat.</li>';
+  const sh=g==='daily'||mine.s>0;
+  $('me').hidden=!sh;
+  if(sh)$('me').innerHTML='<b>#'+rank+'</b><span>'+esc(nick)+'</span><em>'+val(mine)+'</em>';
+}
 go.onclick=()=>{if(!done)verify();else next()};
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!$('gameV').hidden&&!go.disabled&&document.activeElement!==go){e.preventDefault();go.click()}});
 menuInfo();show('menu');
