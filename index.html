@@ -126,8 +126,17 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 .erow .opt{flex:1;font-size:30px;padding:12px;line-height:1.2}
 .mbox .sw{margin:4px 0}
 #toast{z-index:40}
-#lb{margin:18px 0;text-align:left}
-#lb h3{text-align:center;margin:0 0 10px}
+#lb{margin:18px 0;text-align:left;border:2px solid var(--line);border-radius:16px;overflow:hidden}
+#lb h3{text-align:center;margin:0 0 10px;font-size:18px}
+#lbTabs{display:flex;gap:2px;padding:8px 14px 0;background:var(--line)}
+.lt{position:relative;font:inherit;font-size:22px;line-height:1;padding:9px 24px 8px;margin:0;border:0;border-radius:12px 12px 0 0;background:transparent;color:var(--ink);cursor:pointer;opacity:.75}
+@media (hover:hover){.lt:hover{background:rgba(127,127,127,.22)}}
+.lt[aria-selected=true]{background:var(--card);opacity:1;cursor:default}
+.lt[aria-selected=true]::before,.lt[aria-selected=true]::after{content:"";position:absolute;bottom:0;width:12px;height:12px;pointer-events:none}
+.lt[aria-selected=true]::before{left:-12px;background:radial-gradient(circle at 0 0,transparent 12px,var(--card) 12.5px)}
+.lt[aria-selected=true]::after{right:-12px;background:radial-gradient(circle at 100% 0,transparent 12px,var(--card) 12.5px)}
+.lt:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+#lbPanel{padding:14px 14px 16px;background:var(--card)}
 #pubBox{display:flex;gap:8px;margin-bottom:8px}
 #nick{flex:1;min-width:0;font:inherit;padding:12px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
 #pubBox .go{min-width:0;width:auto;padding:12px 18px;margin:0}
@@ -181,7 +190,14 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 </main>
 <footer id="foot"><div class="fin"><div id="msg"></div><button class="go" id="go" disabled>Comprova</button></div></footer></section>
 <section id="end" hidden><div class="mwrap"><h2 id="eT"></h2><div class="big" id="eS"></div><div id="eX"></div><div class="sq" id="eSq"></div><div id="eH"></div>
-<div id="lb"><h3 id="lbT"></h3><div id="pod"></div><ol id="lbL"></ol><div id="me" hidden></div><div id="pubMsg"></div></div>
+<div id="lb">
+<div id="lbTabs" role="tablist">
+<button class="lt" role="tab" data-p="all" aria-label="Sempre" aria-selected="false">♾️</button>
+<button class="lt" role="tab" data-p="month" aria-label="Aquest mes" aria-selected="false">🗓️</button>
+<button class="lt" role="tab" data-p="day" aria-label="Avui" aria-selected="true">☀️</button>
+</div>
+<div id="lbPanel" role="tabpanel"><h3 id="lbT"></h3><div id="pod"></div><ol id="lbL"></ol><div id="me" hidden></div><div id="pubMsg"></div></div>
+</div>
 <button class="go full" id="copy">Copia el resultat</button>
 <div class="erow"><button class="opt" id="eHome" aria-label="Torna al menú" title="Torna al menú">⬅️</button><button class="opt" id="eAgain" aria-label="Torna a jugar" title="Torna a jugar">🔁</button></div></div></section>
 <div class="modal" id="set" hidden><div class="mbox"><h2>Configuració</h2>
@@ -409,7 +425,7 @@ function onResult(p){
 }
 function saveRun(){
   const d=today();
-  if(gm==='daily'&&!DH[d]){DH[d]={s:score,t:Math.round(tAcc),r:res.map(Number).join('')};sv('wtf_daily',DH)}
+  if(gm==='daily'&&!DH[d]){DH[d]={s:score,t:Math.min(Math.round(tAcc),3599999),r:res.map(Number).join('')};sv('wtf_daily',DH)}
   if(gm==='timed'&&score>tb){tb=score;sv('wtf_tbest',tb);nr=true}
 }
 function finish(){saveRun();showEnd(false)}
@@ -486,45 +502,81 @@ const NICK=/^[A-Za-zÀ-ÿ0-9 _.-]{1,12}$/;
 const myNick=()=>($('nick').value||'').trim();
 $('nick').value=ld('wtf_nick','');
 $('nick').addEventListener('input',()=>$('nick').classList.remove('bad'));
-async function pushInf(){
-  const nick=runNick,k='wtf_inf_'+nick.toLowerCase();
-  if(!nick||sess<=ld(k,0))return;
-  try{const {f,db}=await fb();await f.setDoc(f.doc(db,'inf',nick.toLowerCase()),{nick,s:sess,ts:f.serverTimestamp()});sv(k,sess)}catch(e){console.warn(e)}
-}
-async function lbInit(){
-  const g=gm,d=today(),nick=runNick,tok=++lbTok,ok=()=>tok===lbTok;
-  $('lbT').textContent={daily:'Rànquing d’avui',timed:'Millors puntuacions',inf:'Millors ratxes'}[g];
-  $('pod').innerHTML='';$('lbL').innerHTML='<li>Carregant…</li>';$('me').hidden=true;$('pubMsg').textContent='';
-  const mine=g==='daily'?{s:DH[d].s,t:DH[d].t}:{s:g==='inf'?sess:score};
-  try{
-    const {f,db}=await fb();
+const PN={all:'Sempre',month:'Aquest mes',day:'Avui'};
+let lbG='inf',lbD='',lbPer='day',lbRun=0,PQ=Promise.resolve();
+const colName=(g,per,d)=>g+'_'+(per==='all'?'all':per==='month'?'month_'+d.slice(0,7):'day_'+d);
+// Cada partida pot pujar 3 documents (dia, mes, sempre) i només s'escriu si millora el que ja hi ha.
+async function pushOne(g,nick,v,d,pers){
+  if(!nick||!v||(g!=='daily'&&!(v.s>0)))return true;
+  const id=nick.toLowerCase(),t=Math.min(v.t||0,3599999),p=g==='daily'?v.s*1e7+9999999-t:v.s;
+  let ok=true;
+  for(const per of pers){
+    const col=colName(g,per,d),k='wtf_b_'+col+'_'+id;
+    if(p<=ld(k,-1))continue;
     try{
-      if(g==='daily'){if(!ld('wtf_sub_'+d,null)){await f.setDoc(f.doc(db,'daily',d+'_'+nick.toLowerCase()),{date:d,nick,s:mine.s,t:mine.t,ts:f.serverTimestamp()});sv('wtf_sub_'+d,nick)}}
-      else if(g==='timed'){if(mine.s>0&&!subRun){subRun=true;await f.addDoc(f.collection(db,'timed'),{nick,s:mine.s,ts:f.serverTimestamp()})}}
-      else await pushInf();
-    }catch(e){
-      console.warn(e);if(g==='timed')subRun=false;
-      if(ok())$('pubMsg').textContent=g==='daily'?'No s’ha pogut guardar: potser aquest àlies ja s’ha usat avui.':'No s’ha pogut guardar la puntuació.';
-    }
-    let rows,rank;
-    if(g==='daily'){
-      rows=(await f.getDocs(f.query(f.collection(db,'daily'),f.where('date','==',d),f.limit(200)))).docs.map(x=>x.data()).sort((a,b)=>b.s-a.s||a.t-b.t);
-      rank=rows.filter(r=>r.s>mine.s||(r.s===mine.s&&r.t<mine.t)).length+1;
-    }else{
-      rows=(await f.getDocs(f.query(f.collection(db,g),f.orderBy('s','desc'),f.limit(50)))).docs.map(x=>x.data());
-      try{rank=(await f.getCountFromServer(f.query(f.collection(db,g),f.where('s','>',mine.s)))).data().count+1}
-      catch(e){rank=rows.filter(r=>r.s>mine.s).length+1}
+      const {f,db}=await fb(),ref=f.doc(db,col,id),sn=await f.getDoc(ref);
+      if(sn.exists()&&(sn.data().p>=p||(g==='daily'&&per==='day'))){sv(k,sn.data().p);continue}
+      await f.setDoc(ref,g==='daily'?{nick,s:v.s,t,p,ts:f.serverTimestamp()}:{nick,s:v.s,p,ts:f.serverTimestamp()});
+      sv(k,p);
+    }catch(e){console.warn(e);ok=false}
+  }
+  return ok;
+}
+function pushBest(g,nick,v,d,pers){const r=PQ.then(()=>pushOne(g,nick,v,d,pers));PQ=r.catch(()=>{});return r}
+function pushInf(){const n=runNick,d=today();pushBest('inf',n,{s:sess},d,['day','month']);pushBest('inf',n,{s:Math.max(sess,best)},d,['all'])}
+async function submitAll(g,d,nick){
+  const J=[];
+  if(g==='daily'){
+    const E=Object.entries(DH),P=x=>x.s*1e7+9999999-Math.min(x.t,3599999),M=d.slice(0,7),
+      top=a=>a.reduce((m,x)=>!m||P(x)>P(m)?x:m,null),
+      mo=top(E.filter(([k])=>k.slice(0,7)===M).map(e=>e[1])),al=top(E.map(e=>e[1]));
+    J.push([DH[d],['day']],[mo,['month']],[al,['all']]);
+  }else if(g==='timed')J.push([{s:score},['day','month']],[{s:Math.max(score,tb)},['all']]);
+  else J.push([{s:sess},['day','month']],[{s:Math.max(sess,best)},['all']]);
+  return (await Promise.all(J.map(([v,pr])=>pushBest(g,nick,v,d,pr)))).every(Boolean);
+}
+function setTab(per){
+  lbPer=per;
+  document.querySelectorAll('#lbTabs .lt').forEach(b=>{const on=b.dataset.p===per;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1});
+  $('lbT').textContent='Millors puntuacions: '+PN[per];
+}
+async function lbLoad(per){
+  setTab(per);
+  const g=lbG,d=lbD,nick=runNick,id=nick.toLowerCase(),col=colName(g,per,d),tok=++lbTok,ok=()=>tok===lbTok;
+  $('pod').innerHTML='';$('lbL').innerHTML='<li>Carregant…</li>';$('me').hidden=true;
+  try{
+    const {f,db}=await fb(),C=f.collection(db,col);
+    const rows=(await f.getDocs(f.query(C,f.orderBy('p','desc'),f.limit(50)))).docs.map(x=>x.data());
+    let mine=rows.find(r=>r.nick.toLowerCase()===id)||null,rank=0;
+    if(mine)rank=rows.filter(r=>r.p>mine.p).length+1;
+    else{
+      const sn=await f.getDoc(f.doc(db,col,id));
+      if(sn.exists()){
+        mine=sn.data();
+        try{rank=(await f.getCountFromServer(f.query(C,f.where('p','>',mine.p)))).data().count+1}
+        catch(e){rank=rows.length+1}
+      }
     }
     if(ok())renderLB(rows,g,mine,rank,nick);
   }catch(e){console.warn(e);if(ok())$('lbL').innerHTML='<li>No s’ha pogut carregar el rànquing.</li>'}
 }
+async function lbInit(){
+  lbG=gm;lbD=today();
+  const g=lbG,d=lbD,nick=runNick,run=++lbRun,tok=++lbTok;
+  setTab(lbPer);
+  $('pod').innerHTML='';$('lbL').innerHTML='<li>Carregant…</li>';$('me').hidden=true;$('pubMsg').textContent='';
+  const ok=await submitAll(g,d,nick);
+  if(run!==lbRun)return;
+  if(!ok)$('pubMsg').textContent='No s’ha pogut guardar la puntuació.';
+  lbLoad(lbPer);
+}
+document.querySelectorAll('#lbTabs .lt').forEach(b=>b.onclick=()=>{if(b.dataset.p!==lbPer)lbLoad(b.dataset.p)});
 function renderLB(rows,g,mine,rank,nick){
   const val=r=>g==='daily'?r.s+'/10 · '+fmt(r.t):String(r.s),me=nick.toLowerCase(),med=['🥇','🥈','🥉'];
   $('pod').innerHTML=rows.length?'<div class="pod">'+[1,0,2].map(i=>rows[i]?'<div class="pc p'+(i+1)+(rows[i].nick.toLowerCase()===me?' mine':'')+'"><div class="pn">'+esc(rows[i].nick)+'</div><div class="ps">'+val(rows[i])+'</div><div class="pb">'+med[i]+'</div></div>':'').join('')+'</div>':'';
   $('lbL').innerHTML=rows.length?rows.slice(3).map((r,i)=>'<li'+(r.nick.toLowerCase()===me?' class="me"':'')+'><b>'+(i+4)+'</b><span>'+esc(r.nick)+'</span><em>'+val(r)+'</em></li>').join(''):'<li>Encara no hi ha cap resultat.</li>';
-  const sh=g==='daily'||mine.s>0;
-  $('me').hidden=!sh;
-  if(sh)$('me').innerHTML='<b>#'+rank+'</b><span>'+esc(nick)+'</span><em>'+val(mine)+'</em>';
+  $('me').hidden=!mine;
+  if(mine)$('me').innerHTML='<b>#'+rank+'</b><span>'+esc(mine.nick||nick)+'</span><em>'+val(mine)+'</em>';
 }
 go.onclick=()=>{if(!done)verify();else next()};
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!$('gameV').hidden&&!go.disabled&&document.activeElement!==go){e.preventDefault();go.click()}});
