@@ -6,9 +6,9 @@
 <title>WTF? What The Font?</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=EB+Garamond&family=Cormorant+Garamond&family=Libre+Baskerville&family=Tinos&family=Playfair+Display&family=Bodoni+Moda&family=Rokkitt&family=Zilla+Slab&family=Oswald&family=Anton&family=Arimo&family=Inter&family=Cabin&family=Lato&family=Jost&family=Poppins&family=Pinyon+Script&family=Great+Vibes&family=Parisienne&family=Allura&family=UnifrakturCook:wght@700&family=Pirata+One&family=Caveat&family=Kaushan+Script&family=Creepster&family=Monoton&family=Special+Elite&family=Rubik+Glitch&display=swap">
 <style>
-:root{--bg:#fff;--card:#fff;--ink:#4b4b4b;--mute:#777;--line:#e5e5e5;--green:#58cc02;--green-d:#58a700;--okbg:#d7ffb8;--oktx:#58a700;--red:#ff4b4b;--red-d:#ea2b2b;--kobg:#ffdfe0;--kotx:#ea2b2b;--blue:#1cb0f6;--blue-d:#1899d6;--selbg:#ddf4ff;--seltx:#1899d6;--track:#e5e5e5}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131f24;--card:#131f24;--ink:#dce6ec;--mute:#8b9ba4;--line:#37464f;--okbg:#1d3a14;--oktx:#89e219;--kobg:#3b1c1e;--kotx:#ff7878;--selbg:#12303d;--seltx:#49c0f8;--track:#37464f}}
-:root[data-theme="dark"]{--bg:#131f24;--card:#131f24;--ink:#dce6ec;--mute:#8b9ba4;--line:#37464f;--okbg:#1d3a14;--oktx:#89e219;--kobg:#3b1c1e;--kotx:#ff7878;--selbg:#12303d;--seltx:#49c0f8;--track:#37464f}
+:root{--bg:#fff;--card:#fff;--ink:#4b4b4b;--mute:#777;--line:#e5e5e5;--green:#58cc02;--green-d:#58a700;--okbg:#d7ffb8;--oktx:#58a700;--red:#ff4b4b;--red-d:#ea2b2b;--kobg:#ffdfe0;--kotx:#ea2b2b;--blue:#1cb0f6;--blue-d:#1899d6;--selbg:#ddf4ff;--seltx:#1899d6;--track:#e5e5e5;--pane:rgba(255,255,255,.84)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#131f24;--card:#131f24;--ink:#dce6ec;--mute:#8b9ba4;--line:#37464f;--okbg:#1d3a14;--oktx:#89e219;--kobg:#3b1c1e;--kotx:#ff7878;--selbg:#12303d;--seltx:#49c0f8;--track:#37464f;--pane:rgba(19,31,36,.84)}}
+:root[data-theme="dark"]{--bg:#131f24;--card:#131f24;--ink:#dce6ec;--mute:#8b9ba4;--line:#37464f;--okbg:#1d3a14;--oktx:#89e219;--kobg:#3b1c1e;--kotx:#ff7878;--selbg:#12303d;--seltx:#49c0f8;--track:#37464f;--pane:rgba(19,31,36,.84)}
 *{box-sizing:border-box}
 :root{padding-top:env(safe-area-inset-top,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -90,6 +90,7 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 .ic{font:inherit;font-size:20px;background:none;border:0;color:var(--mute);cursor:pointer;padding:4px 8px}
 #hud{max-width:720px;margin:0 auto;padding:8px 16px 0;display:flex;align-items:center;gap:12px;font-weight:800}
 #hud[hidden],.modal[hidden],section[hidden]{display:none}
+#phrase.nm{font-weight:800}
 .tb{flex:1;height:14px;border-radius:99px;background:var(--track);overflow:hidden}
 .tb i{display:block;height:100%;width:100%;background:var(--blue);border-radius:99px;transition:width .1s linear}
 .tb.low i{background:var(--red)}
@@ -157,7 +158,10 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 #lbL{max-height:140px;overflow-y:auto}#lbL:empty{display:none}
 #me{display:flex;gap:10px;align-items:center;margin-top:12px;padding:10px 18px;border:3px solid var(--green);border-radius:99px;font-weight:800}
 #me span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#menu #nick{width:100%;margin:0 0 18px;text-align:center;flex:none}
+#menu #nick{width:100%;margin:0 0 18px;text-align:center;flex:none;background:transparent}
+#bgc{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+#menu .mwrap{position:relative;z-index:1;max-width:min(480px,calc(100% - 24px));margin:20px auto;padding:30px 24px;background:var(--pane);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border:1px solid var(--line);border-radius:28px}
+#menu .gear{z-index:2;background:var(--pane);border-radius:14px}
 #nick.bad{border-color:var(--red)}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Sorts+Mill+Goudy&family=IM+Fell+English&family=Cardo&family=Goudy+Bookletter+1911&family=Linden+Hill&family=Baskervville&family=Libre+Caslon+Text&family=Gelasio&family=PT+Serif&family=Source+Serif+4&family=Abril+Fatface&family=Libre+Bodoni&family=Gloock&family=Rozha+One&family=Prata&family=Roboto+Slab&family=Arvo&family=Bitter&family=Crete+Round&family=Aleo&family=Josefin+Slab&display=swap">
@@ -169,6 +173,7 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 <body>
 <canvas id="cv"></canvas><div id="toast" role="status"></div>
 <section id="menu">
+<canvas id="bgc" aria-hidden="true"></canvas>
 <button class="ic gear" id="gear" aria-label="Configuració">⚙️</button>
 <div class="mwrap">
 <h1>WTF?<small>What The Font?</small></h1>
@@ -177,13 +182,14 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 <button class="opt mode" data-m="daily"><div class="mt"><b>Diari</b><span id="dSub"></span></div><div class="rec" id="dMark" role="img"></div></button>
 <button class="opt mode" data-m="inf"><div class="mt"><b>Infinit</b><span>Sense límit. Quina ratxa faràs?</span></div><div class="rec st" id="mInfR">🔥 <span id="mInf">0</span></div></button>
 <button class="opt mode" data-m="timed"><div class="mt"><b>Contrarellotge</b><span>3 vides i cada cop menys temps.</span></div><div class="rec st" id="mTimR"><span id="mTim">0</span></div></button>
+<button class="opt mode" data-m="names"><div class="mt"><b>Noms</b><span>Et diem el nom. Digues el grup i el subgrup.</span></div><div class="rec st" id="mNamR"><span id="mNam">0</span></div></button>
 <button class="link" id="how">Com es juga</button>
 </div></section>
 <section id="gameV" hidden>
 <div class="top"><button class="ic" id="home" aria-label="Menú">✕</button><span id="flame" class="st" title="Puntuació actual"><span id="fe">🔥</span><span id="sStreak">0</span></span><span class="hs" title="Rècord">🏆 <span id="sBest">0</span></span></div>
 <div id="hud" hidden><span id="hudL"></span><div class="tb" id="tb"><i id="tbI"></i></div><span id="hudR"></span></div>
 <main>
-  <h2>Quina tipografia és?</h2>
+  <h2 id="qT">Quina tipografia és?</h2>
   <div id="phrase" aria-live="polite">…</div>
   <div class="opts" id="famOpts"></div>
   <div id="subBox" hidden><h3>I quin subtipus?</h3><div class="opts" id="subOpts"></div></div>
@@ -211,11 +217,37 @@ footer{padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px))}
 <p><b>Diari:</b> 10 fonts iguals per a tothom, un cop al dia. Guanyes amb més encerts i menys temps.</p>
 <p><b>Infinit:</b> sense límit, busca la ratxa més llarga.</p>
 <p><b>Contrarellotge:</b> 3 vides i cada cop menys temps per respondre.</p>
+<p><b>Noms:</b> et donem el nom d’una tipografia (Futura, Bodoni…) i has de dir de quin grup i subgrup és. 3 vides, sense cronòmetre.</p>
 <button class="go full" id="howX">Entesos</button></div></div>
 <script>
 const FN={serif:'Serif',sans:'Sans Serif',script:'Script',deco:'Decorative'};
 const SN={old:'Old style',trans:'Transitional',modern:'Modern',slab:'Slab',grot:'Grotesque',neo:'Neo-grotesque',human:'Humanist',geo:'Geometric',formal:'Formal',calli:'Calligraphic',black:'Blackletter',casual:'Casual'};
 const SUBS={serif:['old','trans','modern','slab'],sans:['grot','neo','human','geo'],script:['formal','calli','black','casual'],deco:[]};
+// Mode «Noms»: [nom, família, subtipus]
+const NAMES=[
+['Adobe Jenson','serif','old'],['Centaur','serif','old'],['ITC Legacy Serif','serif','old'],
+['Times New Roman','serif','trans'],['Baskerville','serif','trans'],['Georgia','serif','trans'],
+['Didot','serif','modern'],['Playfair','serif','modern'],['Bodoni','serif','modern'],
+['American Typewriter','serif','slab'],['Rockwell','serif','slab'],['Archer','serif','slab'],
+['Trade Gothic','sans','grot'],['Oswald','sans','grot'],['ITC Franklin Gothic','sans','grot'],
+['Helvetica','sans','neo'],['Arial','sans','neo'],['Trebuchet','sans','neo'],
+['Gill Sans','sans','human'],['Cabin','sans','human'],['Frutiger','sans','human'],
+['Futura','sans','geo'],['Underground','sans','geo'],['Avenir','sans','geo'],
+['Snell Roundhand','script','formal'],['Meie','script','formal'],['Pinyon','script','formal'],
+['Bernadette','script','calli'],['Ananda','script','calli'],['Bluebell','script','calli'],
+['Old London','script','black'],['Cloister Black','script','black'],['Olde English','script','black'],
+['Freestyle Script','script','casual'],['Brush Script','script','casual'],['Sketch','script','casual'],
+['Curlz MT','deco',''],['Cocaine Sans','deco',''],['Earwig Factory','deco',''],['Impact Label','deco','']
+];
+let ND=[];
+function nextName(){
+  if(!ND.length){
+    ND=NAMES.map((_,i)=>i);
+    for(let i=ND.length-1;i>0;i--){const k=Math.floor(Math.random()*(i+1));[ND[i],ND[k]]=[ND[k],ND[i]]}
+    if(cur&&NAMES[ND[ND.length-1]][0]===cur[2])ND.unshift(ND.pop());
+  }
+  const n=NAMES[ND.pop()];return [n[1],n[2],n[0],'sans-serif'];
+}
 const FONTS=[
 ['serif','old','EB Garamond','serif'],['serif','old','Cormorant Garamond','serif'],
 ['serif','trans','Libre Baskerville','serif'],['serif','trans','Tinos','serif'],
@@ -285,11 +317,13 @@ function pickF(v){
 }
 function newQ(){
   done=false;fSel=sSel='';
-  let j;if(gm==='daily'){cur=DQ[qn][0];j=DQ[qn][1]}else{const P=FONTS.filter(f=>mode==='slides'?SLIDE.has(f[2]):true),i=rnd(P.length,P.indexOf(cur));j=rnd(PHRASES.length,lastP);lastP=j;cur=P[i]}
+  let j;if(gm==='names'){cur=nextName();j=0}else if(gm==='daily'){cur=DQ[qn][0];j=DQ[qn][1]}else{const P=FONTS.filter(f=>mode==='slides'?SLIDE.has(f[2]):true),i=rnd(P.length,P.indexOf(cur));j=rnd(PHRASES.length,lastP);lastP=j;cur=P[i]}
   mk(famOpts,Object.entries(FN),pickF);
   subBox.hidden=true;subOpts.innerHTML='';
   foot.className='';msg.innerHTML='';go.textContent='Comprova';go.disabled=true;
   phrase.style.opacity=0;
+  $('qT').textContent=gm==='names'?'A quin grup i subgrup pertany?':'Quina tipografia és?';
+  if(gm==='names'){phrase.style.fontFamily='';phrase.textContent=cur[2];phrase.style.opacity=1;window.scrollTo({top:0,behavior:'smooth'});tStart();return}
   const f=cur[2],show=()=>{phrase.style.fontFamily=`"${f}",${cur[3]}`;phrase.textContent=PHRASES[j];phrase.style.opacity=1;window.scrollTo({top:0,behavior:'smooth'});tStart()};
   Promise.race([document.fonts.load(`32px "${f}"`),new Promise(r=>setTimeout(r,1200))]).then(show,()=>{if(LOCAL.has(f)&&gm!=='daily'){console.warn("Font no trobada a fonts/: "+f);FONTS.splice(FONTS.indexOf(cur),1);newQ()}else show()});
 }
@@ -305,7 +339,8 @@ function verify(){
   $('sStreak').textContent=streak;after(perfect,prev);onResult(perfect);
   const sol=deco?FN.deco:`${FN[cur[0]]}, ${SN[cur[1]]}`;
   foot.className=perfect?'ok':'ko';
-  msg.innerHTML=perfect?`Perfecte!<small>${cur[2]}${yr()}</small>`:`Solució: ${sol}<small>Era ${cur[2]}${yr()}</small>`;
+  const nm=gm==='names';
+  msg.innerHTML=perfect?`Perfecte!${nm?'':`<small>${cur[2]}${yr()}</small>`}`:`Solució: ${sol}${nm?'':`<small>Era ${cur[2]}${yr()}</small>`}`;
   go.textContent='Continua';go.disabled=false;go.focus();
 }
 let best=0,rec=false,tt=0,parts=[],raf=0;
@@ -366,13 +401,13 @@ const FONTS0=FONTS.slice();
 const ld=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}};
 const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 let gm='inf',DQ=[],qn=0,lives=3,score=0,res=[],tS=0,tAcc=0,tI=0,tLim=0,nr=false,shareT='';
-let DH=ld('wtf_daily',{}),tb=ld('wtf_tbest',0),sndOn=ld('wtf_snd',true);
+let DH=ld('wtf_daily',{}),tb=ld('wtf_tbest',0),nb=ld('wtf_nbest',0),sndOn=ld('wtf_snd',true);
 const tierOf=(v,t)=>v>=t[2]?3:v>=t[1]?2:v>=t[0]?1:0;
 const dBest=()=>Math.max(0,...Object.values(DH).map(x=>x.s));
 function setCur(){
   $('sStreak').textContent=score;$('fe').textContent='';
   const f=$('flame'),b=f.classList.contains('bump');
-  f.className='st t'+tierOf(score,gm==='timed'?[5,10,20]:[5,8,10])+(b?' bump':'');
+  f.className='st t'+tierOf(score,gm==='timed'||gm==='names'?[5,10,20]:[5,8,10])+(b?' bump':'');
 }
 const fmt=ms=>(ms/1000).toFixed(1)+' s';
 const today=()=>new Date().toLocaleDateString('sv-SE',{timeZone:'Europe/Madrid'});
@@ -390,10 +425,10 @@ function snd(k){
     const q={ok:[[660,.09],[880,.14]],ko:[[220,.18],[160,.25]],win:[[523,.1],[659,.1],[784,.25]]}[k];let t=AC.currentTime;
     q.forEach(([f,d])=>{const o=AC.createOscillator(),g=AC.createGain();o.type=k==='ko'?'sawtooth':'sine';o.frequency.value=f;g.gain.setValueAtTime(.12,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d);t+=d*.9})}catch(e){}
 }
-function show(v){['menu','gameV','end'].forEach(x=>$(x).hidden=x!==v);window.scrollTo(0,0)}
+function show(v){['menu','gameV','end'].forEach(x=>$(x).hidden=x!==v);window.scrollTo(0,0);BG.on(v==='menu')}
 function menuInfo(){
-  $('mInf').textContent=best;$('mTim').textContent=tb;
-  $('mInfR').className='rec st t'+tierOf(best,[3,5,10]);$('mTimR').className='rec st t'+tierOf(tb,[5,10,20]);
+  $('mInf').textContent=best;$('mTim').textContent=tb;$('mNam').textContent=nb;
+  $('mInfR').className='rec st t'+tierOf(best,[3,5,10]);$('mTimR').className='rec st t'+tierOf(tb,[5,10,20]);$('mNamR').className='rec st t'+tierOf(nb,[5,10,20]);
   const x=DH[today()];
   $('dSub').textContent='10 fonts que canvien cada dia';
   $('dMark').textContent=x?'✅':'➡️';$('dMark').setAttribute('aria-label',x?'Ja jugat avui':'Pendent');
@@ -401,6 +436,7 @@ function menuInfo(){
 function tStart(){
   if(gm==='inf')return;
   $('hudL').textContent=gm==='daily'?(qn+1)+'/10':'❤️'.repeat(lives)+'🖤'.repeat(3-lives);
+  if(gm==='names'){clearInterval(tI);return}
   tS=performance.now();clearInterval(tI);
   if(gm==='timed')tLim=Math.max(4,15-.5*qn)*1000;
   tI=setInterval(tk,100);tk();
@@ -420,17 +456,18 @@ function onResult(p){
   if(gm==='inf'){if(p){if(streak>sess)sess=streak}else pushInf()}
   if(p)score++;
   if(gm==='daily'){res.push(p);$('tbI').style.width=((qn+1)*10)+'%';$('hudR').textContent=fmt(tAcc)}
-  if(gm!=='inf'){setCur();$('sBest').textContent=Math.max(gm==='timed'?tb:dBest(),score)}
-  if(gm==='timed'&&!p){lives--;$('hudL').textContent='❤️'.repeat(lives)+'🖤'.repeat(3-lives)}
+  if(gm!=='inf'){setCur();$('sBest').textContent=Math.max(gm==='timed'?tb:gm==='names'?nb:dBest(),score)}
+  if((gm==='timed'||gm==='names')&&!p){lives--;$('hudL').textContent='❤️'.repeat(lives)+'🖤'.repeat(3-lives)}
 }
 function saveRun(){
   const d=today();
   if(gm==='daily'&&!DH[d]){DH[d]={s:score,t:Math.min(Math.round(tAcc),3599999),r:res.map(Number).join('')};sv('wtf_daily',DH)}
   if(gm==='timed'&&score>tb){tb=score;sv('wtf_tbest',tb);nr=true}
+  if(gm==='names'&&score>nb){nb=score;sv('wtf_nbest',nb);nr=true}
 }
 function finish(){saveRun();showEnd(false)}
 function next(){
-  if(gm!=='inf'){qn++;if((gm==='daily'&&qn>=10)||(gm==='timed'&&lives<=0))return finish()}
+  if(gm!=='inf'){qn++;if((gm==='daily'&&qn>=10)||((gm==='timed'||gm==='names')&&lives<=0))return finish()}
   newQ();
 }
 function showEnd(old){
@@ -445,9 +482,9 @@ function showEnd(old){
     $('eAgain').hidden=true;
     if(!old&&x.s>=8){confetti(14);snd('win')}
   }else{
-    $('eT').textContent=gm==='inf'?'Infinit':'Contrarellotge';$('eS').textContent=gm==='inf'?sess:score;
-    $('eX').textContent=gm==='inf'?'Millor ratxa d’aquesta sessió':nr?'Nou rècord! 🏆':'Rècord: '+tb;$('eSq').textContent='';$('eH').innerHTML='';
-    shareT=gm==='inf'?'WTF? What The Font? · Infinit · ratxa de '+sess:'WTF? What The Font? · Contrarellotge · '+score+' encerts';
+    $('eT').textContent=({inf:'Infinit',timed:'Contrarellotge',names:'Noms'})[gm];$('eS').textContent=gm==='inf'?sess:score;
+    $('eX').textContent=gm==='inf'?'Millor ratxa d’aquesta sessió':nr?'Nou rècord! 🏆':'Rècord: '+(gm==='names'?nb:tb);$('eSq').textContent='';$('eH').innerHTML='';
+    shareT=gm==='inf'?'WTF? What The Font? · Infinit · ratxa de '+sess:'WTF? What The Font? · '+(gm==='names'?'Noms':'Contrarellotge')+' · '+score+' encerts';
     $('eAgain').hidden=false;
     if(nr){confetti(16);snd('win')}
   }
@@ -458,7 +495,8 @@ function start(m){
   sv('wtf_nick',nk);runNick=nk;
   gm=m;score=0;qn=0;lives=3;res=[];tAcc=0;streak=0;rec=false;nr=false;subRun=false;sess=0;ans=0;done=true;
   $('sStreak').textContent=0;$('flame').className='st';$('fe').textContent=m==='inf'?'🔥':'';
-  $('sBest').textContent=m==='inf'?best:m==='timed'?tb:dBest();
+  $('sBest').textContent=m==='inf'?best:m==='timed'?tb:m==='names'?nb:dBest();
+  ND=[];phrase.classList.toggle('nm',m==='names');$('hudR').textContent='';$('tb').style.visibility=m==='names'?'hidden':'';
   $('hud').hidden=m==='inf';$('tb').classList.remove('low');$('tbI').style.width=m==='timed'?'100%':'0%';
   if(m==='daily'){
     if(DH[today()]){showEnd(true);return}
@@ -472,7 +510,7 @@ document.querySelectorAll('.mode[data-m]').forEach(b=>b.onclick=()=>start(b.data
 $('home').onclick=()=>{
   if(gm==='daily'&&!DH[today()]){if(!confirm('Si surts, el Diari es dona per jugat avui. Vols sortir?'))return;tStop();saveRun();showEnd(false);return}
   tStop();
-  if(gm==='timed')saveRun();
+  if(gm==='timed'||gm==='names')saveRun();
   if(gm!=='daily'&&ans>0){showEnd(false);return}
   menuInfo();show('menu');
 };
@@ -531,7 +569,7 @@ async function submitAll(g,d,nick){
       top=a=>a.reduce((m,x)=>!m||P(x)>P(m)?x:m,null),
       mo=top(E.filter(([k])=>k.slice(0,7)===M).map(e=>e[1])),al=top(E.map(e=>e[1]));
     J.push([DH[d],['day']],[mo,['month']],[al,['all']]);
-  }else if(g==='timed')J.push([{s:score},['day','month']],[{s:Math.max(score,tb)},['all']]);
+  }else if(g==='timed'||g==='names')J.push([{s:score},['day','month']],[{s:Math.max(score,g==='names'?nb:tb)},['all']]);
   else J.push([{s:sess},['day','month']],[{s:Math.max(sess,best)},['all']]);
   return (await Promise.all(J.map(([v,pr])=>pushBest(g,nick,v,d,pr)))).every(Boolean);
 }
@@ -580,6 +618,90 @@ function renderLB(rows,g,mine,rank,nick){
 }
 go.onclick=()=>{if(!done)verify();else next()};
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&!$('gameV').hidden&&!go.disabled&&document.activeElement!==go){e.preventDefault();go.click()}});
+/* ---- Fons del menú: lletres de moltes tipografies amb gravetat i col·lisions ---- */
+const BG=(()=>{
+  const cv=$('bgc'),cx=cv.getContext('2d'),mqD=matchMedia('(prefers-color-scheme: dark)'),
+    LET='ABCDEFGHIJKLMNOPQRSTUVWXYZabdefghkmnqrty',E=.94,SLOW=.35;
+  let W=0,H=0,L=[],Q=[],run=false,built=false,raf=0,last=0,lastSp=0,kick=0;
+  const dark=()=>{const t=document.documentElement.dataset.theme;return t?t==='dark':mqD.matches};
+  function resize(){
+    const d=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;
+    cv.width=Math.round(W*d);cv.height=Math.round(H*d);cx.setTransform(d,0,0,d,0,0);
+    L.forEach(l=>{l.x=Math.min(Math.max(l.x,l.R),W-l.R);if(l.y>H-l.R)l.y=H-l.R});
+  }
+  function build(){
+    built=true;
+    const n=Math.max(32,Math.min(75,Math.round(innerWidth*innerHeight/15000)));
+    FONTS0.slice().sort(()=>Math.random()-.5).slice(0,n).forEach(f=>{
+      const ch=LET[Math.floor(Math.random()*LET.length)],fam='"'+f[2]+'", '+f[3];
+      Promise.race([document.fonts.load('48px '+fam,ch),new Promise(r=>setTimeout(r,4000,null))])
+        .then(r=>{if(r&&r.length)Q.push({ch,fam})}).catch(()=>{});
+    });
+  }
+  function spawn(q){
+    const sz=Math.max(30,Math.min(54,Math.min(W,H)/12))*(.9+Math.random()*.2);
+    cx.font=sz+'px '+q.fam;cx.textAlign='center';cx.textBaseline='alphabetic';
+    const m=cx.measureText(q.ch),l=m.actualBoundingBoxLeft||0,r=m.actualBoundingBoxRight||m.width,
+      a=m.actualBoundingBoxAscent||sz*.7,d=m.actualBoundingBoxDescent||0,R=Math.max(l+r,a+d)/2*.92+2;
+    L.push({ch:q.ch,fam:q.fam,sz,R,m:R*R,ox:(l-r)/2,oy:(a-d)/2,
+      x:R+Math.random()*Math.max(1,W-2*R),y:-R-Math.random()*30,
+      vx:(Math.random()-.5)*300,vy:Math.random()*150,a:Math.random()*6.28,w:(Math.random()-.5)*6});
+  }
+  function step(dt){
+    const g=Math.max(900,H*1.5);
+    for(const l of L){
+      l.vy+=g*dt;l.x+=l.vx*dt;l.y+=l.vy*dt;l.a+=l.w*dt;
+      if(l.x<l.R){l.x=l.R;l.vx=Math.abs(l.vx)*E;l.w*=.9}
+      else if(l.x>W-l.R){l.x=W-l.R;l.vx=-Math.abs(l.vx)*E;l.w*=.9}
+      if(l.y>H-l.R){
+        l.y=H-l.R;if(l.vy>0)l.vy=l.vy<25?0:-l.vy*E;
+        l.vx*=.996;l.w+=(l.vx/l.R-l.w)*.08;
+      }
+    }
+    for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){
+      const A=L[i],B=L[j],dx=B.x-A.x,dy=B.y-A.y,mn=A.R+B.R,d2=dx*dx+dy*dy;
+      if(d2>=mn*mn||d2===0)continue;
+      const d=Math.sqrt(d2),nx=dx/d,ny=dy/d,ov=mn-d,ia=1/A.m,ib=1/B.m,s=ia+ib;
+      A.x-=nx*ov*ia/s;A.y-=ny*ov*ia/s;B.x+=nx*ov*ib/s;B.y+=ny*ov*ib/s;
+      const rx=B.vx-A.vx,ry=B.vy-A.vy,vn=rx*nx+ry*ny;
+      if(vn<0){
+        const j2=-(1+.96)*vn/s;
+        A.vx-=j2*nx*ia;A.vy-=j2*ny*ia;B.vx+=j2*nx*ib;B.vy+=j2*ny*ib;
+        const vt=-rx*ny+ry*nx;
+        A.w=Math.max(-14,Math.min(14,A.w+.12*vt/A.R));B.w=Math.max(-14,Math.min(14,B.w+.12*vt/B.R));
+      }
+    }
+    // petits impulsos aleatoris perquè no s'aturin del tot
+    kick+=dt;
+    if(kick>.3&&L.length){
+      kick=0;const l=L[Math.floor(Math.random()*L.length)];
+      if(Math.hypot(l.vx,l.vy)<H*.7){l.vy=-H*(.9+Math.random()*.7);l.vx=(Math.random()-.5)*700;l.w=(Math.random()-.5)*12}
+    }
+  }
+  function draw(){
+    cx.clearRect(0,0,W,H);
+    cx.globalAlpha=.75;cx.fillStyle=dark()?'#fff':'#000';
+    cx.textAlign='center';cx.textBaseline='alphabetic';
+    for(const l of L){
+      cx.font=l.sz+'px '+l.fam;
+      cx.save();cx.translate(l.x,l.y);cx.rotate(l.a);cx.fillText(l.ch,l.ox,l.oy);cx.restore();
+    }
+    cx.globalAlpha=1;
+  }
+  function frame(t){
+    if(!run)return;
+    const dt=Math.min(.033,(t-last)/1000||.016);last=t;
+    if(Q.length&&t-lastSp>90){spawn(Q.shift());lastSp=t}
+    for(let i=0;i<3;i++)step(dt*SLOW/3);
+    draw();raf=requestAnimationFrame(frame);
+  }
+  function on(v){
+    if(v&&!run){run=true;resize();if(!built)build();last=performance.now();raf=requestAnimationFrame(frame)}
+    else if(!v){run=false;cancelAnimationFrame(raf)}
+  }
+  addEventListener('resize',()=>{if(run)resize()});
+  return {on};
+})();
 menuInfo();show('menu');
 </script>
 </body>
